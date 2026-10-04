@@ -1,0 +1,6 @@
+{
+  "name": "SciNote Hero - Interactive Scientific Notation Explorer",
+  "description": "An animated, scaffolded visual learning lab designed to help students master reading and writing scientific notation through interactive decimal hops, scale explorations, and gamified challenges.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
