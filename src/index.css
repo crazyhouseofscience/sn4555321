@@ -50,6 +50,17 @@
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
+@keyframes floatUp {
+  0% { opacity: 0; transform: translate(-50%, 15px) scale(0.9); }
+  20% { opacity: 1; transform: translate(-50%, 0) scale(1.05); }
+  80% { opacity: 1; transform: translate(-50%, -10px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -25px) scale(0.95); }
+}
+
+.animate-floatUp {
+  animation: floatUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Hide scrollbars for slick sliders while retaining scrollability */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

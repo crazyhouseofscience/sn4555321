@@ -1,6 +1,6 @@
 {
-  "name": "SciNote Hero - Interactive Scientific Notation Explorer",
-  "description": "An animated, scaffolded visual learning lab designed to help students master reading and writing scientific notation through interactive decimal hops, scale explorations, and gamified challenges.",
+  "name": "SciNote Hero v3.0 - Interactive Scientific Notation Explorer",
+  "description": "Designed by K. Chapman 2026 using Google AI Studio. v3.0 interactive learning lab with 4 modules, 10-question Exit Ticket, and real-world scale matching.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
