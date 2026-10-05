@@ -19,7 +19,6 @@ import {
   Info,
   Lock,
   Unlock,
-  Volume1,
   Camera,
   RefreshCw,
   Award,
@@ -83,7 +82,7 @@ function shuffleArray<T>(arr: T[]): T[] {
   return copy;
 }
 
-// 26 Comprehensive Real-World & Gaming Scale Objects spanning the Powers of Ten
+// 33+ Comprehensive Real-World, Scientific & Gaming Scale Objects spanning Powers of Ten (-15 to +26)
 const SCALE_OBJECTS: ScaleObject[] = [
   {
     id: 1,
@@ -113,19 +112,6 @@ const SCALE_OBJECTS: ScaleObject[] = [
   },
   {
     id: 3,
-    name: 'Hydrogen Atom Diameter',
-    category: 'Subatomic',
-    description: 'The simplest atom in the universe with 1 proton and 1 electron.',
-    typeBadge: '⚛️ Subatomic',
-    visualType: 'atom',
-    correctSci: '1.0 × 10⁻¹⁰ m',
-    power: -10,
-    options: ['1.0 × 10⁻¹⁰ m', '1.0 × 10⁻³ m', '1.0 × 10¹ m', '1.0 × 10⁵ m'],
-    sizeComparison: '10 billion atoms lined up would span just 1 single meter!',
-    fact: 'If an atom were the size of a football stadium, the nucleus would be a single marble at the center!'
-  },
-  {
-    id: 4,
     name: 'Minecraft Diamond Gem',
     category: 'Human & Game Scale',
     description: 'A precious gemstone mined deep underground around level Y: -58.',
@@ -138,7 +124,59 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'Real diamonds on Earth formed over 1 billion years ago under immense pressure 150 km below the mantle.'
   },
   {
+    id: 4,
+    name: 'Minecraft Nether Portal Height',
+    category: 'Human & Game Scale',
+    description: 'A glowing obsidian doorway standing 5 blocks high to travel between dimensions.',
+    typeBadge: '🎮 Minecraft (5 m)',
+    visualType: 'minecraft',
+    correctSci: '5.0 × 10⁰ m',
+    power: 0,
+    options: ['5.0 × 10⁰ m', '5.0 × 10⁻⁴ m', '5.0 × 10² m', '5.0 × 10⁵ m'],
+    sizeComparison: '5 blocks tall = 5.0 meters (5.0 × 10⁰ m), about the height of a two-story house.',
+    fact: 'In Minecraft, traveling 1 block in the Nether equals 8 blocks in the Overworld!'
+  },
+  {
     id: 5,
+    name: 'Proton (Atomic Nucleus)',
+    category: 'Subatomic',
+    description: 'A positively charged subatomic particle inside the nucleus of every atom.',
+    typeBadge: '⚛️ Subatomic',
+    visualType: 'atom',
+    correctSci: '1.0 × 10⁻¹⁵ m',
+    power: -15,
+    options: ['1.0 × 10⁻¹⁵ m', '1.0 × 10⁻¹⁰ m', '1.0 × 10⁻⁵ m', '1.0 × 10² m'],
+    sizeComparison: '1 femtometer (0.000000000000001 m). 100,000 times smaller than the atom itself!',
+    fact: 'Protons are made of even smaller elementary particles called quarks held by the strong nuclear force.'
+  },
+  {
+    id: 6,
+    name: 'Hydrogen Atom Diameter',
+    category: 'Subatomic',
+    description: 'The simplest atom in the universe with 1 proton and 1 electron.',
+    typeBadge: '⚛️ Subatomic',
+    visualType: 'atom',
+    correctSci: '1.0 × 10⁻¹⁰ m',
+    power: -10,
+    options: ['1.0 × 10⁻¹⁰ m', '1.0 × 10⁻³ m', '1.0 × 10¹ m', '1.0 × 10⁵ m'],
+    sizeComparison: '10 billion atoms lined up would span just 1 single meter!',
+    fact: 'If an atom were the size of a football stadium, the nucleus would be a single marble at the center!'
+  },
+  {
+    id: 7,
+    name: 'Water Molecule (H₂O)',
+    category: 'Subatomic',
+    description: 'Two hydrogen atoms bonded to one oxygen atom forming a water molecule.',
+    typeBadge: '💧 Molecular',
+    visualType: 'atom',
+    correctSci: '2.8 × 10⁻¹⁰ m',
+    power: -10,
+    options: ['2.8 × 10⁻¹⁰ m', '2.8 × 10⁻⁵ m', '2.8 × 10¹ m', '2.8 × 10⁴ m'],
+    sizeComparison: 'About 0.28 nanometers across. A single 8-ounce glass of water holds over 8 septillion molecules!',
+    fact: 'Water is one of the only substances on Earth that expands and becomes less dense when it freezes.'
+  },
+  {
+    id: 8,
     name: 'DNA Strand Double Helix Width',
     category: 'Microscopic',
     description: 'The genetic blueprint spiral inside the nucleus of every living cell.',
@@ -151,7 +189,46 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'If you unraveled all the DNA molecules in your body, they would stretch across the solar system.'
   },
   {
-    id: 6,
+    id: 9,
+    name: 'Ribosome Protein Factory',
+    category: 'Microscopic',
+    description: 'The cellular machine that translates genetic mRNA code into proteins.',
+    typeBadge: '🔬 Cellular',
+    visualType: 'dna',
+    correctSci: '2.0 × 10⁻⁸ m',
+    power: -8,
+    options: ['2.0 × 10⁻⁸ m', '2.0 × 10⁻⁴ m', '2.0 × 10¹ m', '2.0 × 10⁶ m'],
+    sizeComparison: '20 nanometers wide. A single human cell contains millions of active ribosomes.',
+    fact: 'Ribosomes are so vital to life that their core structure has remained almost unchanged for billions of years.'
+  },
+  {
+    id: 10,
+    name: 'Coronavirus (COVID-19) Virion',
+    category: 'Microscopic',
+    description: 'A spherical RNA virus surrounded by an envelope with protruding spike proteins.',
+    typeBadge: '🦠 Virus',
+    visualType: 'dna',
+    correctSci: '1.2 × 10⁻⁷ m',
+    power: -7,
+    options: ['1.2 × 10⁻⁷ m', '1.2 × 10⁻² m', '1.2 × 10³ m', '1.2 × 10⁸ m'],
+    sizeComparison: '120 nanometers (0.00000012 m). About 1,000 times smaller than the thickness of a paper sheet!',
+    fact: 'The total volume of all COVID-19 virions that infected humanity during the pandemic could fit inside a single soda can.'
+  },
+  {
+    id: 11,
+    name: 'E. coli Bacterium Length',
+    category: 'Microscopic',
+    description: 'A rod-shaped single-celled bacterium commonly studied in high school biology labs.',
+    typeBadge: '🔬 Bacteria',
+    visualType: 'blood',
+    correctSci: '2.0 × 10⁻⁶ m',
+    power: -6,
+    options: ['2.0 × 10⁻⁶ m', '2.0 × 10⁻¹ m', '2.0 × 10² m', '2.0 × 10⁵ m'],
+    sizeComparison: '2 micrometers (0.000002 m). 500 bacteria lined end-to-end would equal 1 millimeter.',
+    fact: 'Under ideal warm conditions, an E. coli bacterium can divide every 20 minutes.'
+  },
+  {
+    id: 12,
     name: 'Human Red Blood Cell',
     category: 'Microscopic',
     description: 'The biconcave microscopic discs delivering oxygen to your muscles.',
@@ -164,7 +241,20 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'Your bone marrow creates approximately 2.4 million new red blood cells every single second.'
   },
   {
-    id: 7,
+    id: 13,
+    name: 'Human White Blood Cell (Macrophage)',
+    category: 'Microscopic',
+    description: 'A large immune system defender that engulfs bacteria and cellular debris.',
+    typeBadge: '🛡️ Immune Cell',
+    visualType: 'blood',
+    correctSci: '1.5 × 10⁻⁵ m',
+    power: -5,
+    options: ['1.5 × 10⁻⁵ m', '1.5 × 10⁻¹ m', '1.5 × 10³ m', '1.5 × 10⁷ m'],
+    sizeComparison: '15 micrometers (0.000015 m), roughly twice the diameter of a red blood cell.',
+    fact: 'Macrophages crawl through your tissues like tiny amoebas hunting for foreign invaders.'
+  },
+  {
+    id: 14,
     name: 'Thickness of a Human Hair',
     category: 'Microscopic',
     description: 'The width of a single strand of hair from your scalp.',
@@ -173,11 +263,50 @@ const SCALE_OBJECTS: ScaleObject[] = [
     correctSci: '1.0 × 10⁻⁴ m',
     power: -4,
     options: ['1.0 × 10⁻⁴ m', '1.0 × 10⁻¹⁰ m', '1.0 × 10² m', '1.0 × 10⁵ m'],
-    sizeComparison: '0.1 millimeters (0.0001 m)—the narrowest threshold visible to the naked eye.',
+    sizeComparison: '0.1 millimeters (0.0001 m)—the narrowest threshold visible to the naked human eye.',
     fact: 'Human hair is surprisingly strong; a full head of hair could support the weight of two elephants!'
   },
   {
-    id: 8,
+    id: 15,
+    name: 'Dust Mite Body Length',
+    category: 'Microscopic',
+    description: 'A microscopic eight-legged creature that lives in household dust and fabrics.',
+    typeBadge: '🔍 Micro-Bug',
+    visualType: 'hair',
+    correctSci: '2.5 × 10⁻⁴ m',
+    power: -4,
+    options: ['2.5 × 10⁻⁴ m', '2.5 × 10⁻⁸ m', '2.5 × 10¹ m', '2.5 × 10⁴ m'],
+    sizeComparison: '0.25 millimeters (0.00025 m). Barely visible against a dark background under bright light.',
+    fact: 'A typical mattress can host millions of harmless dust mites feeding on shedded skin flakes.'
+  },
+  {
+    id: 16,
+    name: 'Grain of Table Salt',
+    category: 'Microscopic',
+    description: 'A tiny cubic sodium chloride crystal sprinkled from a kitchen salt shaker.',
+    typeBadge: '🧂 Crystal',
+    visualType: 'diamond',
+    correctSci: '5.0 × 10⁻⁴ m',
+    power: -4,
+    options: ['5.0 × 10⁻⁴ m', '5.0 × 10⁻⁹ m', '5.0 × 10² m', '5.0 × 10⁵ m'],
+    sizeComparison: '0.5 millimeters (0.0005 m). Exactly half a millimeter across.',
+    fact: 'Under a magnifying glass, table salt always forms perfect geometric cubes because of its crystal lattice.'
+  },
+  {
+    id: 17,
+    name: 'Grain of Beach Sand',
+    category: 'Human & Game Scale',
+    description: 'A coarse grain of silica quartz washed onto the ocean seashore.',
+    typeBadge: '🏖️ Sand',
+    visualType: 'diamond',
+    correctSci: '1.0 × 10⁻³ m',
+    power: -3,
+    options: ['1.0 × 10⁻³ m', '1.0 × 10⁻⁷ m', '1.0 × 10² m', '1.0 × 10⁴ m'],
+    sizeComparison: '1.0 millimeter (0.001 m). Exactly 1/1000th of a meter.',
+    fact: 'Scientists estimate there are approximately 7.5 quintillion grains of sand on all the beaches on Earth.'
+  },
+  {
+    id: 18,
     name: 'Worker Ant Body Length',
     category: 'Human & Game Scale',
     description: 'A typical garden worker ant marching in a colony line.',
@@ -190,7 +319,46 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'The total weight of all ants on Earth is roughly equal to the total weight of all humans combined.'
   },
   {
-    id: 9,
+    id: 19,
+    name: 'Honeybee Length',
+    category: 'Human & Game Scale',
+    description: 'A worker honeybee pollinating wildflowers and producing honey.',
+    typeBadge: '🐝 Insect',
+    visualType: 'ant',
+    correctSci: '1.5 × 10⁻² m',
+    power: -2,
+    options: ['1.5 × 10⁻² m', '1.5 × 10⁻⁶ m', '1.5 × 10¹ m', '1.5 × 10³ m'],
+    sizeComparison: '1.5 centimeters (0.015 m). Fits easily across a coin.',
+    fact: 'Honeybees flap their wings 200 times per second, creating their distinctive buzz sound.'
+  },
+  {
+    id: 20,
+    name: 'Standard Basketball Diameter',
+    category: 'Human & Game Scale',
+    description: 'An official NBA regulation basketball used on the gym court.',
+    typeBadge: '🏀 Sports',
+    visualType: 'earth',
+    correctSci: '2.4 × 10⁻¹ m',
+    power: -1,
+    options: ['2.4 × 10⁻¹ m', '2.4 × 10⁻⁵ m', '2.4 × 10² m', '2.4 × 10⁶ m'],
+    sizeComparison: '24 centimeters (0.24 meters, about 9.5 inches across).',
+    fact: 'The pebble texture on a basketball consists of over 4,000 tiny molded rubber dots for grip.'
+  },
+  {
+    id: 21,
+    name: 'School Chromebook Width',
+    category: 'Human & Game Scale',
+    description: 'The standard 11.6-inch laptop used by students at Perth Amboy High School.',
+    typeBadge: '💻 Tech',
+    visualType: 'minecraft',
+    correctSci: '2.9 × 10⁻¹ m',
+    power: -1,
+    options: ['2.9 × 10⁻¹ m', '2.9 × 10⁻⁶ m', '2.9 × 10¹ m', '2.9 × 10⁴ m'],
+    sizeComparison: '29 centimeters wide (0.29 meters, or roughly 11.5 inches).',
+    fact: 'Your Chromebook’s microprocessor contains billions of microscopic transistors measuring just 5 nanometers each.'
+  },
+  {
+    id: 22,
     name: 'Adult Human Height',
     category: 'Human & Game Scale',
     description: 'The average height of a high school student or adult teacher.',
@@ -203,7 +371,20 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'You are approximately 1 cm taller in the morning because cartilage in your spine decompresses during sleep!'
   },
   {
-    id: 10,
+    id: 23,
+    name: 'Yellow School Bus Length',
+    category: 'Human & Game Scale',
+    description: 'A full-size 72-passenger school bus pulling up to PAHS.',
+    typeBadge: '🚌 Vehicle',
+    visualType: 'minecraft',
+    correctSci: '1.2 × 10¹ m',
+    power: 1,
+    options: ['1.2 × 10¹ m', '1.2 × 10⁻³ m', '1.2 × 10⁵ m', '1.2 × 10⁸ m'],
+    sizeComparison: '12 meters long (about 40 feet). Equals 12 Minecraft blocks bumper-to-bumper!',
+    fact: 'National School Bus Glossy Yellow was officially chosen in 1939 because black lettering stands out best against it.'
+  },
+  {
+    id: 24,
     name: 'Blue Whale Length',
     category: 'Human & Game Scale',
     description: 'The largest marine mammal to ever exist on Earth, larger than any dinosaur.',
@@ -216,7 +397,46 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'A blue whale’s tongue weighs as much as an entire adult elephant.'
   },
   {
-    id: 11,
+    id: 25,
+    name: 'Regulation Football Field Length',
+    category: 'Human & Game Scale',
+    description: 'The distance between the back of each endzone on a standard American football stadium.',
+    typeBadge: '🏈 Field (100 m)',
+    visualType: 'minecraft',
+    correctSci: '1.0 × 10² m',
+    power: 2,
+    options: ['1.0 × 10² m', '1.0 × 10⁻² m', '1.0 × 10⁴ m', '1.0 × 10⁷ m'],
+    sizeComparison: '100 meters (109.7 yards). Light covers this entire distance in just 330 nanoseconds!',
+    fact: 'Olympic sprinters like Usain Bolt can sprint the entire 100-meter field in under 9.6 seconds.'
+  },
+  {
+    id: 26,
+    name: 'Eiffel Tower Height',
+    category: 'Earth & Space',
+    description: 'The wrought-iron landmark tower standing in Paris, France.',
+    typeBadge: '🗼 Landmark',
+    visualType: 'everest',
+    correctSci: '3.3 × 10² m',
+    power: 2,
+    options: ['3.3 × 10² m', '3.3 × 10⁻¹ m', '3.3 × 10⁶ m', '3.3 × 10¹⁰ m'],
+    sizeComparison: '330 meters tall (1,083 feet). Equal to three football fields stacked vertically!',
+    fact: 'During summer heat, thermal expansion causes the iron Eiffel Tower to grow by up to 15 centimeters (6 inches).'
+  },
+  {
+    id: 27,
+    name: 'Burj Khalifa Skyscraper',
+    category: 'Earth & Space',
+    description: 'The tallest architectural skyscraper in the world, located in Dubai.',
+    typeBadge: '🏙️ Skyscraper',
+    visualType: 'everest',
+    correctSci: '8.3 × 10² m',
+    power: 2,
+    options: ['8.3 × 10² m', '8.3 × 10⁻³ m', '8.3 × 10⁵ m', '8.3 × 10⁹ m'],
+    sizeComparison: '830 meters tall (2,717 feet). Over half a mile into the sky!',
+    fact: 'The building is so tall that people on the top floors see the sun set three minutes later than people at the base.'
+  },
+  {
+    id: 28,
     name: 'Mount Everest Elevation',
     category: 'Earth & Space',
     description: 'The highest mountain peak above sea level on Earth, in the Himalayas.',
@@ -229,7 +449,20 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'Tectonic plate collisions continue to push Mount Everest upwards by about 4 millimeters every year.'
   },
   {
-    id: 12,
+    id: 29,
+    name: 'Mariana Trench Ocean Depth',
+    category: 'Earth & Space',
+    description: 'The deepest surveyed oceanic canyon on Earth, in the western Pacific Ocean.',
+    typeBadge: '🌊 Deep Ocean',
+    visualType: 'everest',
+    correctSci: '1.1 × 10⁴ m',
+    power: 4,
+    options: ['1.1 × 10⁴ m', '1.1 × 10⁻² m', '1.1 × 10⁷ m', '1.1 × 10¹¹ m'],
+    sizeComparison: '11,000 meters deep (nearly 36,000 feet). If you dropped Mount Everest inside, its peak would still be 2 km underwater!',
+    fact: 'Water pressure at the bottom is over 1,000 times atmospheric pressure—like having an elephant standing on your thumb.'
+  },
+  {
+    id: 30,
     name: 'Radius of Planet Earth',
     category: 'Earth & Space',
     description: 'The distance from Earth’s core out to the surface ocean crust.',
@@ -242,7 +475,7 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'Earth is not a perfect sphere; centrifugal rotation causes an equatorial bulge of about 43 kilometers.'
   },
   {
-    id: 13,
+    id: 31,
     name: 'Distance from Earth to the Moon',
     category: 'Earth & Space',
     description: 'The orbit distance separating Earth and our celestial satellite.',
@@ -255,10 +488,10 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'Apollo 11 astronauts took approximately 3 days traveling at high speed to traverse this span in 1969.'
   },
   {
-    id: 14,
-    name: 'Distance from Earth to the Sun',
+    id: 32,
+    name: 'Distance from Earth to the Sun (1 AU)',
     category: 'Cosmic',
-    description: '1 Astronomical Unit (1 AU)—the distance light travels in 8 minutes 20 seconds.',
+    description: '1 Astronomical Unit—the distance light travels in 8 minutes 20 seconds.',
     typeBadge: '☀️ Solar System',
     visualType: 'sun',
     correctSci: '1.5 × 10¹¹ m',
@@ -268,7 +501,20 @@ const SCALE_OBJECTS: ScaleObject[] = [
     fact: 'The photons warming your face right now took 100,000 years to reach the Sun’s surface, then just 500 seconds to reach you.'
   },
   {
-    id: 15,
+    id: 33,
+    name: 'Voyager 1 Distance from Earth',
+    category: 'Cosmic',
+    description: 'The farthest human-made object in history, cruising in interstellar space.',
+    typeBadge: '🚀 Interstellar',
+    visualType: 'galaxy',
+    correctSci: '2.4 × 10¹³ m',
+    power: 13,
+    options: ['2.4 × 10¹³ m', '2.4 × 10⁶ m', '2.4 × 10⁻³ m', '2.4 × 10¹⁹ m'],
+    sizeComparison: '24 trillion meters (over 160 AU). Radio signals traveling at light speed take over 22 hours to reach it!',
+    fact: 'Launched in 1977, Voyager 1 carries a Golden Record with greetings and music from Earth for any extraterrestrial civilization.'
+  },
+  {
+    id: 34,
     name: 'Milky Way Galaxy Diameter',
     category: 'Cosmic',
     description: 'The diameter of our barred spiral galaxy holding over 100 billion star systems.',
@@ -279,6 +525,19 @@ const SCALE_OBJECTS: ScaleObject[] = [
     options: ['1.0 × 10²¹ m', '1.0 × 10¹¹ m', '1.0 × 10⁻⁵ m', '1.0 × 10⁷ m'],
     sizeComparison: '1,000,000,000,000,000,000,000 meters! Light takes 100,000 full years to cross from one edge to the other.',
     fact: 'Our solar system orbits the galactic center at 514,000 mph, taking 230 million years to complete one orbit.'
+  },
+  {
+    id: 35,
+    name: 'Observable Universe Diameter',
+    category: 'Cosmic',
+    description: 'The entire sphere of cosmological space observable from Earth.',
+    typeBadge: '🔭 Cosmos',
+    visualType: 'galaxy',
+    correctSci: '8.8 × 10²⁶ m',
+    power: 26,
+    options: ['8.8 × 10²⁶ m', '8.8 × 10¹⁴ m', '8.8 × 10² m', '8.8 × 10⁻¹⁰ m'],
+    sizeComparison: '880 septillion meters (about 93 billion light-years across)!',
+    fact: 'The universe is expanding faster than light at its outer horizon, meaning distant galaxies are continuously slipping out of view.'
   }
 ];
 
@@ -615,6 +874,7 @@ export const SimpleLab: React.FC = () => {
 
   // Active Module State (4 Modules)
   const [currentModule, setCurrentModule] = useState<LabModule>('to_sci');
+  const [soundOn, setSoundOn] = useState(true);
 
   // Gated Progression: Must solve 15 problems in each module before unlocking the next
   const REQUIRED_PER_MODULE = 15;
@@ -623,6 +883,54 @@ export const SimpleLab: React.FC = () => {
   const [mod3Solved, setMod3Solved] = useState(0);
   const [mod4Solved, setMod4Solved] = useState(0);
   const [teacherBypassAll, setTeacherBypassAll] = useState(false);
+  const [v3Clicks, setV3Clicks] = useState(0);
+  const [lockScreenClicks, setLockScreenClicks] = useState(0);
+  const [studioClicks, setStudioClicks] = useState(0);
+
+  // Secret Teacher Unlock via Footer 'Studio' (4 clicks)
+  const handleStudioClick = () => {
+    const next = studioClicks + 1;
+    setStudioClicks(next);
+    if (next >= 4) {
+      setTeacherBypassAll((prev) => {
+        const nextState = !prev;
+        if (nextState) {
+          setIsUnlocked(true);
+          if (soundOn) sound.playFanfare();
+        } else {
+          if (soundOn) sound.playPop();
+        }
+        return nextState;
+      });
+      setStudioClicks(0);
+    }
+  };
+
+  // Secret Teacher Keyboard Shortcut: Ctrl + Shift + T or Alt + T
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 't') || (e.altKey && e.key.toLowerCase() === 't')) {
+        e.preventDefault();
+        setTeacherBypassAll((prev) => {
+          const next = !prev;
+          if (next) {
+            setIsUnlocked(true);
+            if (soundOn) sound.playFanfare();
+          }
+          return next;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [soundOn]);
+
+  // Ensure screen reader text-to-speech is completely off
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  }, []);
 
   const isMod2Unlocked = teacherBypassAll || mod1Solved >= REQUIRED_PER_MODULE;
   const isMod3Unlocked = teacherBypassAll || mod2Solved >= REQUIRED_PER_MODULE;
@@ -645,6 +953,7 @@ export const SimpleLab: React.FC = () => {
   const [scaleObjIdx, setScaleObjIdx] = useState(0);
   const [shuffledScaleOptions, setShuffledScaleOptions] = useState<string[]>([]);
   const [selectedScaleOption, setSelectedScaleOption] = useState<string | null>(null);
+  const [scaleWrongChoices, setScaleWrongChoices] = useState<string[]>([]);
   const [scaleAnswerStatus, setScaleAnswerStatus] = useState<'idle' | 'correct' | 'wrong'>('idle');
 
   // Total Solved Count across all modules
@@ -679,7 +988,6 @@ export const SimpleLab: React.FC = () => {
 
   // Instructions Modal
   const [showInstructionsModal, setShowInstructionsModal] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
 
   // Current object in Module 4
   const currentScaleObject = SCALE_OBJECTS[scaleObjIdx % SCALE_OBJECTS.length];
@@ -688,6 +996,9 @@ export const SimpleLab: React.FC = () => {
   useEffect(() => {
     if (currentScaleObject) {
       setShuffledScaleOptions(shuffleArray(currentScaleObject.options));
+      setSelectedScaleOption(null);
+      setScaleWrongChoices([]);
+      setScaleAnswerStatus('idle');
     }
   }, [scaleObjIdx, currentScaleObject]);
 
@@ -718,9 +1029,32 @@ export const SimpleLab: React.FC = () => {
 
   // Unlocking condition: Requires 8 solved practice problems to unlock Exit Ticket
   const REQUIRED_EXIT_TICKET_COUNT = 8;
-  const isExitTicketUnlocked = totalSolvedCount >= REQUIRED_EXIT_TICKET_COUNT || teacherUnlockClicks >= 3;
+  const isExitTicketUnlocked = teacherBypassAll || totalSolvedCount >= REQUIRED_EXIT_TICKET_COUNT || teacherUnlockClicks >= 3;
 
   const responsiveStyles = getChromebookResponsiveStyles(prob.digits.length);
+
+  // Teacher testing auto-solve
+  const handleTeacherAutoSolve = () => {
+    if (currentModule === 'scale_objects') {
+      handleSelectScaleOption(currentScaleObject.correctSci);
+    } else {
+      setCurrentDot(prob.targetDot);
+      if (prob.direction === 'to_sci') {
+        setInputA(prob.expectedA);
+        setSelectedSign(prob.expectedExp < 0 ? '-' : '+');
+        setInputExpMagnitude(Math.abs(prob.expectedExp).toString());
+      } else {
+        const cleanExpected = prob.digits.join('').replace(/^0+(?=\d)/, '');
+        let val = cleanExpected;
+        if (!prob.isBig) {
+          const zeros = Math.abs(prob.expectedExp) - 1;
+          val = '0.' + '0'.repeat(zeros) + prob.expectedA.replace('.', '');
+        }
+        setInputStdNumber(val);
+      }
+    }
+    if (soundOn) sound.playPop();
+  };
 
   // Rank helper based on XP points
   const getRankBadge = (xp: number) => {
@@ -786,16 +1120,6 @@ export const SimpleLab: React.FC = () => {
       // ignore
     }
     if (soundOn) sound.playPop();
-  };
-
-  // Text-to-speech
-  const handleSpeak = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    }
   };
 
   // Animated Curved Hops Demo
@@ -1001,6 +1325,8 @@ export const SimpleLab: React.FC = () => {
   // Module 4: Scale Object Selection Handler (Choices are randomized on every question)
   const handleSelectScaleOption = (opt: string) => {
     if (scaleAnswerStatus === 'correct') return;
+    if (scaleWrongChoices.includes(opt)) return;
+
     setSelectedScaleOption(opt);
     setTotalAttempts((a) => a + 1);
 
@@ -1030,6 +1356,9 @@ export const SimpleLab: React.FC = () => {
       }
       confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
     } else {
+      // INCORRECT CHOICE: DO NOT reveal correct answer!
+      // Add only this choice to wrong choices list so it gets disabled with ✗
+      setScaleWrongChoices((prev) => [...prev, opt]);
       setScaleAnswerStatus('wrong');
       setStreak(0);
       if (soundOn) sound.playError();
@@ -1040,6 +1369,7 @@ export const SimpleLab: React.FC = () => {
     if (soundOn) sound.playPop();
     setScaleObjIdx((i) => i + 1);
     setSelectedScaleOption(null);
+    setScaleWrongChoices([]);
     setScaleAnswerStatus('idle');
   };
 
@@ -1160,9 +1490,23 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-4 font-sans">
         <div className="bg-slate-900 border-2 border-cyan-500/60 rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 shadow-2xl text-center">
-          <div className="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-cyan-400 mx-auto shadow-inner">
+          {/* Secret Teacher Unlock: Click lock 3 times */}
+          <button
+            type="button"
+            onClick={() => {
+              const next = lockScreenClicks + 1;
+              setLockScreenClicks(next);
+              if (next >= 3) {
+                setIsUnlocked(true);
+                setTeacherBypassAll(true);
+                if (soundOn) sound.playFanfare();
+              }
+            }}
+            title="Class lock (Teacher: click 3 times for quick testing unlock)"
+            className="w-16 h-16 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 flex items-center justify-center text-cyan-400 mx-auto shadow-inner cursor-pointer transition-all"
+          >
             <Lock className="w-8 h-8" />
-          </div>
+          </button>
 
           <div className="space-y-1">
             <span className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest block">
@@ -1206,7 +1550,15 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
           </form>
 
           <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-500 font-sans">
-            Designed by K. Chapman 2026 using Google AI Studio • v3.0
+            Designed by K. Chapman 2026 using Google AI{' '}
+            <span
+              onClick={handleStudioClick}
+              className="cursor-pointer select-none font-semibold hover:text-slate-300 transition-colors"
+              title="Google AI Studio (Teacher: click 4x for secret unlock)"
+            >
+              Studio
+            </span>{' '}
+            • v3.0
           </div>
         </div>
       </div>
@@ -1223,12 +1575,75 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
         </div>
       )}
 
+      {/* Secret Teacher Testing Banner */}
+      {teacherBypassAll && (
+        <div className="w-full max-w-4xl bg-amber-950/95 border-2 border-amber-400 rounded-2xl p-2 px-3.5 flex flex-wrap items-center justify-between gap-2 shadow-2xl mb-1 text-xs shrink-0 animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">👑</span>
+            <div>
+              <strong className="text-amber-300">Teacher Testing Mode Active</strong>
+              <span className="text-amber-200/80 text-[11px] block sm:inline sm:ml-2">
+                All Modules 1-4 &amp; Exit Ticket Unlocked
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleTeacherAutoSolve}
+              className="px-2.5 py-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-lg text-xs cursor-pointer shadow flex items-center gap-1"
+              title="Auto-solve current problem to quickly test next"
+            >
+              <span>⚡ Quick-Solve</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowExitTicketModal(true);
+                setExitStage('intro');
+                if (soundOn) sound.playPop();
+              }}
+              className="px-2.5 py-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs cursor-pointer shadow"
+            >
+              <span>⭐ Open Exit Ticket</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setTeacherBypassAll(false);
+                if (soundOn) sound.playPop();
+              }}
+              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-[11px] cursor-pointer"
+              title="Lock again for student mode"
+            >
+              Re-Lock 🔒
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Top Header - Ultra-compact with ENLARGED font scores for Chromebooks */}
       <header className="w-full max-w-4xl flex items-center justify-between pb-1.5 border-b border-slate-800 shrink-0">
         <div>
           <h1 className="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-1.5">
             <span>PAHS Sci-Notation Lab</span>
-            <span className="text-cyan-400 font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-500/50">v3.0</span>
+            {/* Secret Teacher Trigger: Click v3.0 3 times */}
+            <button
+              type="button"
+              onClick={() => {
+                const next = v3Clicks + 1;
+                setV3Clicks(next);
+                if (next >= 3) {
+                  setTeacherBypassAll((prev) => !prev);
+                  setV3Clicks(0);
+                  if (soundOn) sound.playFanfare();
+                }
+              }}
+              className="text-cyan-400 font-mono text-xs font-black px-1.5 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-500/50 cursor-pointer hover:bg-cyan-900 transition-colors"
+              title="Version 3.0 (Teacher: click 3 times to toggle testing mode)"
+            >
+              v3.0
+            </button>
             {streak >= 3 && (
               <span className="flex items-center gap-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">
                 <Flame className="w-3.5 h-3.5 text-amber-400" />
@@ -1248,6 +1663,78 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
             <span className={`text-xs font-sans font-black px-2.5 py-0.5 rounded-full border ${getRankBadge(xpPoints).color}`}>
               {getRankBadge(xpPoints).label}
             </span>
+          </div>
+        </div>
+
+        {/* DYNAMIC CIRCULAR PROGRESS RING IN HUD (15-Question Threshold with 4 Color-Coded Segments) */}
+        <div
+          className="flex items-center gap-2 bg-slate-900/95 border border-slate-800 rounded-2xl px-2.5 py-1 shadow-inner"
+          title={`15-Question Module Unlock Progress:\nMod 1 (Cyan): ${mod1Solved}/15\nMod 2 (Amber): ${mod2Solved}/15\nMod 3 (Purple): ${mod3Solved}/15\nMod 4 (Emerald): ${mod4Solved}/15`}
+        >
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center shrink-0">
+            <svg className="w-9 h-9 sm:w-10 sm:h-10" viewBox="0 0 44 44">
+              {/* 4 Quadrant Background Tracks: Circumference = 106.8. Quadrant arc = 24.2, gap = 2.5 */}
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#1e293b" strokeWidth="3.5"
+                strokeDasharray="24.2 82.6" transform="rotate(-90 22 22)" />
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#1e293b" strokeWidth="3.5"
+                strokeDasharray="24.2 82.6" transform="rotate(0 22 22)" />
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#1e293b" strokeWidth="3.5"
+                strokeDasharray="24.2 82.6" transform="rotate(90 22 22)" />
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#1e293b" strokeWidth="3.5"
+                strokeDasharray="24.2 82.6" transform="rotate(180 22 22)" />
+
+              {/* Dynamic Color-Coded Segments */}
+              {/* Mod 1 (Cyan #06B6D4) */}
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#06b6d4" strokeWidth="3.5" strokeLinecap="round"
+                strokeDasharray={`${(Math.min(mod1Solved, 15) / 15) * 24.2} 106.8`} transform="rotate(-90 22 22)"
+                className="transition-all duration-500" />
+              {/* Mod 2 (Amber #F59E0B) */}
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#f59e0b" strokeWidth="3.5" strokeLinecap="round"
+                strokeDasharray={`${(Math.min(mod2Solved, 15) / 15) * 24.2} 106.8`} transform="rotate(0 22 22)"
+                className="transition-all duration-500" />
+              {/* Mod 3 (Purple #A855F7) */}
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#a855f7" strokeWidth="3.5" strokeLinecap="round"
+                strokeDasharray={`${(Math.min(mod3Solved, 15) / 15) * 24.2} 106.8`} transform="rotate(90 22 22)"
+                className="transition-all duration-500" />
+              {/* Mod 4 (Emerald #10B981) */}
+              <circle cx="22" cy="22" r="17" fill="none" stroke="#10b981" strokeWidth="3.5" strokeLinecap="round"
+                strokeDasharray={`${(Math.min(mod4Solved, 15) / 15) * 24.2} 106.8`} transform="rotate(180 22 22)"
+                className="transition-all duration-500" />
+            </svg>
+
+            {/* Center Count */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              {(currentModule === 'to_sci' ? mod1Solved : currentModule === 'to_std' ? mod2Solved : currentModule === 'mixed' ? mod3Solved : mod4Solved) >= 15 ? (
+                <span className="text-emerald-400 font-black text-xs">✓</span>
+              ) : (
+                <span className="text-[9px] font-mono font-black text-white leading-none">
+                  {currentModule === 'to_sci' ? mod1Solved : currentModule === 'to_std' ? mod2Solved : currentModule === 'mixed' ? mod3Solved : mod4Solved}
+                  <span className="text-[7px] text-slate-400 font-normal">/15</span>
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Module Label & Color Dots */}
+          <div className="hidden sm:flex flex-col text-[10px] font-mono leading-tight">
+            <div className="flex items-center gap-1 font-bold">
+              <span className="text-slate-300">
+                {currentModule === 'to_sci' ? 'Mod 1' : currentModule === 'to_std' ? 'Mod 2' : currentModule === 'mixed' ? 'Mod 3' : 'Mod 4'}:
+              </span>
+              <span className={(currentModule === 'to_sci' ? mod1Solved : currentModule === 'to_std' ? mod2Solved : currentModule === 'mixed' ? mod3Solved : mod4Solved) >= 15 ? 'text-emerald-400 font-black' : 'text-amber-300 font-black'}>
+                {(currentModule === 'to_sci' ? mod1Solved : currentModule === 'to_std' ? mod2Solved : currentModule === 'mixed' ? mod3Solved : mod4Solved) >= 15
+                  ? 'Unlocked ✓'
+                  : `${15 - (currentModule === 'to_sci' ? mod1Solved : currentModule === 'to_std' ? mod2Solved : currentModule === 'mixed' ? mod3Solved : mod4Solved)} left`}
+              </span>
+            </div>
+            {/* Color-coded segments indicator */}
+            <div className="flex items-center gap-1 mt-0.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${mod1Solved >= 15 ? 'bg-cyan-400 ring-1 ring-cyan-300' : 'bg-cyan-700'}`} title={`Mod 1: ${mod1Solved}/15`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${mod2Solved >= 15 ? 'bg-amber-400 ring-1 ring-amber-300' : 'bg-amber-700'}`} title={`Mod 2: ${mod2Solved}/15`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${mod3Solved >= 15 ? 'bg-purple-400 ring-1 ring-purple-300' : 'bg-purple-700'}`} title={`Mod 3: ${mod3Solved}/15`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${mod4Solved >= 15 ? 'bg-emerald-400 ring-1 ring-emerald-300' : 'bg-emerald-700'}`} title={`Mod 4: ${mod4Solved}/15`} />
+              <span className="text-[8px] text-slate-500 font-sans ml-0.5">15-Goal</span>
+            </div>
           </div>
         </div>
 
@@ -1403,17 +1890,6 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
                   {currentScaleObject.typeBadge}
                 </span>
               </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleSpeak(`${currentScaleObject.name}: ${currentScaleObject.description}`)}
-                  className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white border border-slate-700"
-                  title="Read Aloud"
-                >
-                  <Volume1 className="w-3.5 h-3.5" />
-                </button>
-              </div>
             </div>
 
             {/* ENLARGED Object Card with High-Contrast Visual Diagram */}
@@ -1443,29 +1919,33 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
             {/* 4 Interactive Choices - SHUFFLED DYNAMICALLY (NOT stuck in top-left!) */}
             <div className="grid grid-cols-2 gap-2.5">
               {shuffledScaleOptions.map((opt, i) => {
-                const isSelected = selectedScaleOption === opt;
                 const isCorrect = opt === currentScaleObject.correctSci;
+                const isWrongChoice = scaleWrongChoices.includes(opt);
 
-                let btnStyle = 'bg-slate-950 hover:bg-slate-800/80 border-slate-800 text-white';
-                if (scaleAnswerStatus !== 'idle') {
+                let btnStyle = 'bg-slate-950 hover:bg-slate-800/80 border-slate-800 text-white cursor-pointer';
+
+                if (scaleAnswerStatus === 'correct') {
                   if (isCorrect) {
-                    btnStyle = 'bg-emerald-950/80 border-emerald-500 text-emerald-300 ring-2 ring-emerald-400';
-                  } else if (isSelected) {
-                    btnStyle = 'bg-rose-950/80 border-rose-500 text-rose-300';
+                    btnStyle = 'bg-emerald-950/80 border-emerald-500 text-emerald-300 ring-2 ring-emerald-400 cursor-default';
                   } else {
-                    btnStyle = 'opacity-40 bg-slate-950 border-slate-800 text-slate-400';
+                    btnStyle = 'opacity-35 bg-slate-950 border-slate-900 text-slate-500 cursor-not-allowed';
                   }
+                } else if (isWrongChoice) {
+                  // Only this specific wrong option is flagged red and disabled — correct answer is NOT revealed!
+                  btnStyle = 'bg-rose-950/60 border-rose-500/70 text-rose-300/80 line-through opacity-60 cursor-not-allowed';
                 }
 
                 return (
                   <button
                     key={i}
                     type="button"
+                    disabled={scaleAnswerStatus === 'correct' || isWrongChoice}
                     onClick={() => handleSelectScaleOption(opt)}
-                    className={`py-3.5 px-3 rounded-xl border-2 font-mono font-black text-base sm:text-xl transition-all cursor-pointer shadow flex items-center justify-center gap-2 ${btnStyle}`}
+                    className={`py-3.5 px-3 rounded-xl border-2 font-mono font-black text-base sm:text-xl transition-all shadow flex items-center justify-center gap-2 ${btnStyle}`}
                   >
                     <span>{opt}</span>
                     {scaleAnswerStatus === 'correct' && isCorrect && <Check className="w-5 h-5 text-emerald-400" />}
+                    {isWrongChoice && <X className="w-5 h-5 text-rose-400 inline" />}
                   </button>
                 );
               })}
@@ -1477,7 +1957,7 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
                 className={`p-3 rounded-xl text-xs sm:text-sm leading-relaxed border ${
                   scaleAnswerStatus === 'correct'
                     ? 'bg-emerald-950/60 border-emerald-500/50 text-emerald-200'
-                    : 'bg-rose-950/60 border-rose-500/50 text-rose-200'
+                    : 'bg-amber-950/70 border-amber-500/70 text-amber-200'
                 }`}
               >
                 {scaleAnswerStatus === 'correct' ? (
@@ -1486,7 +1966,7 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
                   </div>
                 ) : (
                   <div>
-                    <strong>✗ Not quite!</strong> Check the order of magnitude. Microscopic objects have negative powers (10⁻³ to 10⁻¹⁰), while buildings and cosmic bodies have positive powers (10² to 10²¹). Try again!
+                    <strong>⚠️ Not quite!</strong> Look at the comparison above: is this object microscopic (negative power) or large (positive power)? {4 - scaleWrongChoices.length} choices left. Try another option!
                   </div>
                 )}
               </div>
@@ -1521,15 +2001,6 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
               </div>
 
               <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => handleSpeak(`Convert ${prob.original}`)}
-                  className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white border border-slate-700"
-                  title="Read Problem Aloud"
-                >
-                  <Volume1 className="w-3.5 h-3.5" />
-                </button>
-
                 <button
                   type="button"
                   onClick={triggerAnimatedHint}
@@ -2247,7 +2718,15 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
 
       {/* Footer Attribution */}
       <footer className="w-full max-w-4xl py-0.5 text-center text-[10px] text-slate-500 font-sans border-t border-slate-900 shrink-0">
-        Designed by K. Chapman 2026 using Google AI Studio • v3.0
+        Designed by K. Chapman 2026 using Google AI{' '}
+        <span
+          onClick={handleStudioClick}
+          className="cursor-pointer select-none font-semibold hover:text-slate-300 transition-colors"
+          title="Google AI Studio (Teacher: click 4x for secret unlock)"
+        >
+          Studio
+        </span>{' '}
+        • v3.0
       </footer>
     </div>
   );
