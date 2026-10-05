@@ -976,8 +976,20 @@ export const SimpleLab: React.FC = () => {
 
   // 10-Question Exit Ticket State
   const [showExitTicketModal, setShowExitTicketModal] = useState(false);
-  const [exitStudentName, setExitStudentName] = useState('');
-  const [exitClassPeriod, setExitClassPeriod] = useState('Period 1');
+  const [exitStudentName, setExitStudentName] = useState(() => {
+    try {
+      return localStorage.getItem('pahs_student_name') || '';
+    } catch {
+      return '';
+    }
+  });
+  const [exitClassPeriod, setExitClassPeriod] = useState(() => {
+    try {
+      return localStorage.getItem('pahs_student_period') || 'Period 1';
+    } catch {
+      return 'Period 1';
+    }
+  });
   const [exitStage, setExitStage] = useState<'intro' | 'testing' | 'results'>('intro');
   const [exitQuestions, setExitQuestions] = useState<ExitQuestion[]>([]);
   const [exitCurrentQIdx, setExitCurrentQIdx] = useState(0);
@@ -985,6 +997,41 @@ export const SimpleLab: React.FC = () => {
   const [exitScore, setExitScore] = useState<{ correct: number; total: number; details: boolean[] }>({ correct: 0, total: 10, details: [] });
   const [copiedExit, setCopiedExit] = useState(false);
   const [teacherUnlockClicks, setTeacherUnlockClicks] = useState(0);
+
+  // 4-Module Lab Completion Certificate Modal State
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [completionStudentName, setCompletionStudentName] = useState(() => {
+    try {
+      return localStorage.getItem('pahs_student_name') || '';
+    } catch {
+      return '';
+    }
+  });
+  const [completionClassPeriod, setCompletionClassPeriod] = useState(() => {
+    try {
+      return localStorage.getItem('pahs_student_period') || 'Period 1';
+    } catch {
+      return 'Period 1';
+    }
+  });
+  const [copiedCompletion, setCopiedCompletion] = useState(false);
+  const [hasShownCompletionPopup, setHasShownCompletionPopup] = useState(false);
+
+  const handleStudentNameChange = (name: string) => {
+    setCompletionStudentName(name);
+    setExitStudentName(name);
+    try {
+      localStorage.setItem('pahs_student_name', name);
+    } catch {}
+  };
+
+  const handleClassPeriodChange = (period: string) => {
+    setCompletionClassPeriod(period);
+    setExitClassPeriod(period);
+    try {
+      localStorage.setItem('pahs_student_period', period);
+    } catch {}
+  };
 
   // Instructions Modal
   const [showInstructionsModal, setShowInstructionsModal] = useState(false);
@@ -1275,9 +1322,29 @@ export const SimpleLab: React.FC = () => {
     }
 
     // Success! Update module counts
-    if (currentModule === 'to_sci') setMod1Solved((c) => c + 1);
-    else if (currentModule === 'to_std') setMod2Solved((c) => c + 1);
-    else if (currentModule === 'mixed') setMod3Solved((c) => c + 1);
+    let nextM1 = mod1Solved;
+    let nextM2 = mod2Solved;
+    let nextM3 = mod3Solved;
+    if (currentModule === 'to_sci') {
+      nextM1 = mod1Solved + 1;
+      setMod1Solved(nextM1);
+    } else if (currentModule === 'to_std') {
+      nextM2 = mod2Solved + 1;
+      setMod2Solved(nextM2);
+    } else if (currentModule === 'mixed') {
+      nextM3 = mod3Solved + 1;
+      setMod3Solved(nextM3);
+    }
+
+    // If all 4 modules are now completed (>= 15 each), show completion screen
+    if (nextM1 >= 15 && nextM2 >= 15 && nextM3 >= 15 && mod4Solved >= 15 && !hasShownCompletionPopup) {
+      setHasShownCompletionPopup(true);
+      setTimeout(() => {
+        setShowCompletionModal(true);
+        sound.playFanfare();
+        confetti({ particleCount: 120, spread: 90, origin: { y: 0.5 } });
+      }, 1200);
+    }
 
     setStatus('correct');
     const isStreakBonus = streak >= 2;
@@ -1332,7 +1399,8 @@ export const SimpleLab: React.FC = () => {
 
     if (opt === currentScaleObject.correctSci) {
       setScaleAnswerStatus('correct');
-      setMod4Solved((c) => c + 1);
+      const nextMod4 = mod4Solved + 1;
+      setMod4Solved(nextMod4);
 
       const isStreakBonus = streak >= 2;
       const gainedXp = isStreakBonus ? 150 : 100;
@@ -1355,6 +1423,16 @@ export const SimpleLab: React.FC = () => {
         sound.playFanfare();
       }
       confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
+
+      // Check if Module 4 completed 15 questions (or all 4 completed) -> show Completion Screen
+      if (nextMod4 >= 15 && !hasShownCompletionPopup) {
+        setHasShownCompletionPopup(true);
+        setTimeout(() => {
+          setShowCompletionModal(true);
+          sound.playFanfare();
+          confetti({ particleCount: 120, spread: 90, origin: { y: 0.5 } });
+        }, 1200);
+      }
     } else {
       // INCORRECT CHOICE: DO NOT reveal correct answer!
       // Add only this choice to wrong choices list so it gets disabled with ✗
@@ -1485,6 +1563,49 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
     setTimeout(() => setCopiedExit(false), 2500);
   };
 
+  const handleCopyCompletionSummary = () => {
+    const name = completionStudentName.trim() || 'Student';
+    const period = completionClassPeriod;
+    const accuracy = totalAttempts > 0 ? Math.round((totalSolvedCount / totalAttempts) * 100) : 100;
+    const now = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    const hash = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+    const text = `🎓 PERTH AMBOY HIGH SCHOOL - SCIENTIFIC NOTATION LAB
+==================================================
+STUDENT COMPLETION CERTIFICATE
+==================================================
+Student Name: ${name}
+Class Period: ${period}
+Date Completed: ${now}
+Verification Code: #PAHS-LAB4-${totalSolvedCount}-${hash}
+
+📊 OVERALL LAB PERFORMANCE:
+- Total Questions Mastered: ${totalSolvedCount} questions
+- Total Attempts: ${totalAttempts}
+- Overall Lab Accuracy: ${accuracy}%
+- Total Earned XP: ${xpPoints} XP
+- High School Rank: ${getRankBadge(xpPoints).label}
+
+🏆 ALL 4 MODULES MASTERED (15/15 Each):
+✓ Module 1 (Number ➔ Scientific Notation): ${mod1Solved}/15 Completed
+✓ Module 2 (Scientific Notation ➔ Number): ${mod2Solved}/15 Completed
+✓ Module 3 (Mixed Fluency Challenge): ${mod3Solved}/15 Completed
+✓ Module 4 (Real-World & Game Scale): ${mod4Solved}/15 Completed
+==================================================
+Mastery Verified & Ready for Exit Ticket Assessment!`;
+
+    navigator.clipboard.writeText(text);
+    setCopiedCompletion(true);
+    if (soundOn) sound.playPop();
+    setTimeout(() => setCopiedCompletion(false), 2500);
+  };
+
   // PASSWORD LOCK SCREEN
   if (!isUnlocked) {
     return (
@@ -1595,6 +1716,17 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
               title="Auto-solve current problem to quickly test next"
             >
               <span>⚡ Quick-Solve</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowCompletionModal(true);
+                if (soundOn) sound.playFanfare();
+              }}
+              className="px-2.5 py-1 bg-purple-500 hover:bg-purple-400 text-white font-black rounded-lg text-xs cursor-pointer shadow flex items-center gap-1"
+              title="Test the 4-Module Completion Screen & Certificate"
+            >
+              <span>🏆 View Completion Screen</span>
             </button>
             <button
               type="button"
@@ -1870,8 +2002,31 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
           title={isMod4Unlocked ? 'Module 4: Real-World Scale' : `Locked! Solve 15 in Mod 3 (Current: ${mod3Solved}/15)`}
         >
           {!isMod4Unlocked ? <Lock className="w-3.5 h-3.5 text-slate-500" /> : <Compass className="w-3.5 h-3.5" />}
-          <span>Mod 4: Real Scale {isMod4Unlocked ? `(${mod4Solved})` : `(${mod3Solved}/15)`}</span>
+          <span>
+            Mod 4: Real Scale{' '}
+            {isMod4Unlocked
+              ? mod4Solved >= 15
+                ? `(${mod4Solved}/15 ✓)`
+                : `(${mod4Solved}/15)`
+              : `(${mod3Solved}/15)`}
+          </span>
         </button>
+
+        {/* 4-Module Lab Completion Certificate Badge / Button */}
+        {(mod4Solved >= 15 || totalSolvedCount >= 60 || teacherBypassAll) && (
+          <button
+            type="button"
+            onClick={() => {
+              setShowCompletionModal(true);
+              if (soundOn) sound.playFanfare();
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-lg cursor-pointer ring-2 ring-amber-300 animate-pulse"
+            title="View your official 4-Module Lab Completion Certificate"
+          >
+            <Award className="w-4 h-4 text-slate-950" />
+            <span>🏆 View Certificate</span>
+          </button>
+        )}
       </div>
 
       {/* Main Container - Strict Single-Screen Viewport for Chromebook */}
@@ -2644,6 +2799,190 @@ Verification Hash: #PAHS-EXIT-${Math.abs(exitScore.correct * 97 + exitScore.tota
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* POPUP MODAL: 4-MODULE LAB COMPLETION CERTIFICATE */}
+      {showCompletionModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 animate-fadeIn overflow-y-auto">
+          <div className="bg-slate-900 border-2 border-amber-400 rounded-3xl max-w-xl w-full p-4 sm:p-6 space-y-3.5 shadow-2xl relative my-auto">
+            <button
+              onClick={() => setShowCompletionModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 transition-colors cursor-pointer"
+              title="Close Certificate"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Certificate Header Banner */}
+            <div className="text-center space-y-1 pb-2 border-b border-slate-800">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-black uppercase tracking-wider animate-pulse">
+                <Award className="w-4 h-4 text-amber-400" />
+                <span>All 4 Modules Completed!</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                🎓 Lab Mastery Certificate
+              </h2>
+              <p className="text-xs text-slate-400 font-medium">
+                Perth Amboy High School &middot; Interactive Scientific Notation Lab
+              </p>
+            </div>
+
+            {/* Student Name & Class Period Input / Display */}
+            <div className="bg-slate-950 p-3 rounded-2xl border border-slate-800 space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div className="sm:col-span-2">
+                  <label className="text-[11px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">
+                    Student Full Name:
+                  </label>
+                  <input
+                    type="text"
+                    value={completionStudentName}
+                    onChange={(e) => handleStudentNameChange(e.target.value)}
+                    placeholder="Type Student Full Name..."
+                    className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-1.5 text-sm text-white font-black focus:outline-none shadow-inner"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">
+                    Class Period:
+                  </label>
+                  <select
+                    value={completionClassPeriod}
+                    onChange={(e) => handleClassPeriodChange(e.target.value)}
+                    className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-1.5 text-sm text-white font-bold focus:outline-none shadow-inner"
+                  >
+                    <option>Period 1</option>
+                    <option>Period 2</option>
+                    <option>Period 3</option>
+                    <option>Period 4</option>
+                    <option>Period 5</option>
+                    <option>Period 6</option>
+                    <option>Period 7</option>
+                    <option>Period 8</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Total Score & Mastery Metrics Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="bg-slate-950 p-2 rounded-xl border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Total Solved</span>
+                <strong className="text-xl sm:text-2xl font-black font-mono text-emerald-400 block">
+                  {totalSolvedCount}
+                </strong>
+                <span className="text-[9px] text-emerald-300 font-semibold">Questions Solved</span>
+              </div>
+
+              <div className="bg-slate-950 p-2 rounded-xl border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Accuracy</span>
+                <strong className="text-xl sm:text-2xl font-black font-mono text-amber-300 block">
+                  {totalAttempts > 0 ? Math.round((totalSolvedCount / totalAttempts) * 100) : 100}%
+                </strong>
+                <span className="text-[9px] text-slate-400 font-semibold">{totalSolvedCount}/{totalAttempts} tries</span>
+              </div>
+
+              <div className="bg-slate-950 p-2 rounded-xl border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Experience</span>
+                <strong className="text-xl sm:text-2xl font-black font-mono text-purple-300 block">
+                  {xpPoints} XP
+                </strong>
+                <span className="text-[9px] text-purple-300 font-semibold">{getRankBadge(xpPoints).label}</span>
+              </div>
+
+              <div className="bg-slate-950 p-2 rounded-xl border border-slate-800 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Modules</span>
+                <strong className="text-xl sm:text-2xl font-black font-mono text-cyan-400 block">
+                  4 / 4
+                </strong>
+                <span className="text-[9px] text-cyan-300 font-semibold">100% Complete</span>
+              </div>
+            </div>
+
+            {/* 4-Module Breakdown Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/40 flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <strong className="text-cyan-300 block">Mod 1: Num ➔ Sci</strong>
+                  <span className="text-[11px] text-slate-300">Target decimal hopping</span>
+                </div>
+                <span className="font-mono font-black text-xs px-2 py-1 rounded-lg bg-cyan-900/80 text-cyan-200 border border-cyan-500/40">
+                  {mod1Solved}/15 ✓
+                </span>
+              </div>
+
+              <div className="p-2 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <strong className="text-amber-300 block">Mod 2: Sci ➔ Num</strong>
+                  <span className="text-[11px] text-slate-300">Sign direction expanding</span>
+                </div>
+                <span className="font-mono font-black text-xs px-2 py-1 rounded-lg bg-amber-900/80 text-amber-200 border border-amber-500/40">
+                  {mod2Solved}/15 ✓
+                </span>
+              </div>
+
+              <div className="p-2 rounded-xl bg-purple-950/40 border border-purple-500/40 flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <strong className="text-purple-300 block">Mod 3: Mixed Challenge</strong>
+                  <span className="text-[11px] text-slate-300">Two-way conversion fluency</span>
+                </div>
+                <span className="font-mono font-black text-xs px-2 py-1 rounded-lg bg-purple-900/80 text-purple-200 border border-purple-500/40">
+                  {mod3Solved}/15 ✓
+                </span>
+              </div>
+
+              <div className="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <strong className="text-emerald-300 block">Mod 4: Real-World Scale</strong>
+                  <span className="text-[11px] text-slate-300">Powers of 10 (-15 to +26)</span>
+                </div>
+                <span className="font-mono font-black text-xs px-2 py-1 rounded-lg bg-emerald-900/80 text-emerald-200 border border-emerald-500/40">
+                  {mod4Solved}/15 ✓
+                </span>
+              </div>
+            </div>
+
+            {/* Chromebook Snapshot Instructions Banner */}
+            <div className="p-3 rounded-2xl bg-amber-950/80 border-2 border-amber-400 text-amber-100 space-y-1 shadow">
+              <div className="flex items-center gap-1.5 font-black text-amber-300 text-xs uppercase">
+                <Camera className="w-4 h-4 text-amber-400" />
+                <span>📸 Chromebook Screenshot Instructions:</span>
+              </div>
+              <p className="text-[11px] text-amber-200 leading-relaxed">
+                Press <strong>Ctrl</strong> + <strong>Show Windows 🔲</strong> (the rectangle key above 6) to take a screenshot of this certificate and turn it in on Google Classroom!
+              </p>
+              <div className="pt-1 text-[10px] font-mono text-amber-300 text-center border-t border-amber-500/40">
+                Official PAHS Verification Code: #PAHS-LAB4-{totalSolvedCount}-{Math.abs(xpPoints * 37 + 109).toString(16).toUpperCase()}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-2 pt-1">
+              <button
+                type="button"
+                onClick={handleCopyCompletionSummary}
+                className="flex-1 py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 border border-slate-700 cursor-pointer shadow"
+              >
+                {copiedCompletion ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                <span>{copiedCompletion ? 'Copied to Clipboard!' : 'Copy Summary for Classroom'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCompletionModal(false);
+                  setShowExitTicketModal(true);
+                  setExitStage('intro');
+                  if (soundOn) sound.playPop();
+                }}
+                className="flex-1 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 shadow cursor-pointer"
+              >
+                <FileCheck className="w-4 h-4" />
+                <span>Take 10-Q Exit Ticket ➔</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
